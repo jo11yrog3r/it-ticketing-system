@@ -9,5 +9,6 @@ public class Main {
 
         // [worked] queue.deleteTicket(2);
         // [worked] queue.listTickets();
+        queue.updateTicket(2);
     }
 }
