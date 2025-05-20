@@ -54,4 +54,27 @@ public class TicketQueue {
             current = current.next;
         }
     }
+
+    public void deleteTicket(int id) {
+        if (head == null) { // Again, head == null means that the list is empty
+            System.out.println("[ERROR] There are no tickets to delete.\n");
+            return;
+        } else if (head.ticket.getId() == id) { // If given ID matches first item on list, delete that ticket
+            head = head.next; // Effectively deletes the original head node, replacing it with the next ticket in the list
+            return;
+        }
+
+        Node current = head;
+        Node previous = null;
+        while (current != null && current.ticket.getId() != id) {
+            previous = current;
+            current = current.next;
+        }
+
+        if (current == null) {
+            System.out.println("[ERROR] There are no tickets to delete.\n");
+        }
+
+        previous.next = current.next; // Removes the specific ticket
+    }
 }

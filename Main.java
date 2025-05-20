@@ -3,10 +3,11 @@ public class Main {
         TicketQueue queue = new TicketQueue();
 
         // Default filler tickets
-        queue.createTicket("Bob", "Tech. Kai", 3, "20-03-2025 15:59");
-        queue.createTicket("Kelly", "Tech. Wilson", 4, "20-03-2025 16:05");
-        queue.createTicket("Mike", "Tech. Prince", 1, "20-03-2025 13:31");
+        queue.createTicket("Bob", "Tech. Kai", 3, "20-03-2025 15:59"); // id 1
+        queue.createTicket("Kelly", "Tech. Wilson", 4, "20-03-2025 16:05"); // id 2
+        queue.createTicket("Mike", "Tech. Prince", 1, "20-03-2025 13:31"); // id 3
 
-        queue.listTickets();
+        // [worked] queue.deleteTicket(2);
+        // [worked] queue.listTickets();
     }
 }
