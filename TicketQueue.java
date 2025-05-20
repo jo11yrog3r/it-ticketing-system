@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class TicketQueue {
     private Node head;
     private int nextId = 1;
@@ -96,8 +98,57 @@ public class TicketQueue {
             return null;
         }
 
-        System.out.println("[INFO] Ticket " + current.ticket.getId() + " found.");
+        System.out.println("[INFO] Ticket " + current.ticket.getId() + " found.\n");
         System.out.println(current.ticket.toString());
         return current.ticket;
+    }
+
+    public void updateTicket(int id) {
+        searchTicket(id);
+        Scanner scanner = new Scanner(System.in);
+        boolean looping = true;
+        boolean incorrect = true;
+        String txtInput = "";
+        int intInput;
+
+        Node current = head;
+        while (looping) {
+            incorrect = true; // Refreshing so the inner while loop can iterate properly
+            System.out.print(">>> Editable fields: [O]wner, [P]riority, [C]ancel\n>>> "); // User selects what value to edit
+            txtInput = scanner.nextLine();
+
+            if (txtInput.toUpperCase().equals("O")) { // Normalize user input and check it
+                System.out.print(">>> " + current.ticket.getOwner() + " -> ");
+                txtInput = scanner.nextLine();
+                current.ticket.setOwner(txtInput);
+            } else if (txtInput.toUpperCase().equals("P")) {
+                System.out.print(">>> " + current.ticket.getPriority() + " -> ");
+                intInput = scanner.nextInt();
+                scanner.nextLine();
+                current.ticket.setPriority(intInput);
+            } else {
+                System.out.println(">>> Edit cancelled.");
+                return;
+            }
+
+            while (incorrect) {
+                System.out.print(">>> Edit another value? Y/n\n>>> ");
+                txtInput = scanner.nextLine();
+                if (txtInput.toUpperCase().equals("Y")) {
+                    incorrect = false; // Must be set to false so it won't iterate the incorrect loop
+                } else if (txtInput.toUpperCase().equals("N")) {
+                    incorrect = false;
+                    looping = false;
+                    break;
+                } else {
+                    System.out.println("[ERROR] Invalid response, must be Yy/Nn.\n");
+                    incorrect = true;
+                }
+            }
+        }
+        System.out.println("[INFO] Ticket " + current.ticket.getId() + " edited.\n");
+        System.out.println(current.ticket.toString());
+
+        scanner.close();
     }
 }
