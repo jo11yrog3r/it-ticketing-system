@@ -72,9 +72,32 @@ public class TicketQueue {
         }
 
         if (current == null) {
-            System.out.println("[ERROR] There are no tickets to delete.\n");
+            System.out.println("[ERROR] No such ticket exists with the ID [" + id + "]. \n");
+            return;
         }
 
+        System.out.println("[INFO] Ticket with ID " + current.ticket.getId() + " successfully deleted.");
         previous.next = current.next; // Removes the specific ticket
+    }
+
+    public Ticket searchTicket(int id) {
+        if (head == null) {
+            System.out.println("[ERROR] There are no tickets to search for.\n");
+            return null;
+        }
+        
+        Node current = head;
+        while (current != null && current.ticket.getId() != id) {
+            current = current.next;
+        }
+
+        if (current == null) {
+            System.out.println("[ERROR] No such ticket exists with the ID [" + id + "]. \n");
+            return null;
+        }
+
+        System.out.println("[INFO] Ticket " + current.ticket.getId() + " found.");
+        System.out.println(current.ticket.toString());
+        return current.ticket;
     }
 }
