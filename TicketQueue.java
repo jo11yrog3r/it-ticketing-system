@@ -27,6 +27,7 @@ public class TicketQueue {
         if (head == null || ticket.getPriority() < head.ticket.getPriority()) {
             node.next = head;
             head = node;
+            System.out.println("[INFO] Successfully created ticket with ID " + node.ticket.getId() + ".");
             return;
         } 
 
@@ -39,6 +40,7 @@ public class TicketQueue {
         // Inserting node
         node.next = current.next;
         current.next = node;
+        System.out.println("[INFO] Successfully created ticket with ID " + node.ticket.getId() + ".");
     }
 
     public void listTickets() {
