@@ -80,7 +80,7 @@ public class Main {
                 }
                 break;
             case 3:
-                System.out.print("Enter your ticked ID:\n>>> ");
+                System.out.print("Enter your ticket ID:\n>>> ");
                 intInput = scanner.nextInt();
                 scanner.nextLine();
 
