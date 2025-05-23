@@ -37,7 +37,7 @@ public class Main {
            }
 
         switch (intInput) {
-            case 1:
+            case 1: // Create ticket
                 String creator;
                 String owner;
                 int priority;
@@ -56,7 +56,7 @@ public class Main {
 
                 queue.createTicket(creator, owner, priority, timestamp);
                 break;
-            case 2:
+            case 2: // Search for ticket
                 while (searchLoop) {
                     System.out.print("Search by [I]D or [C]ancel\n>>> ");
                     txtInput = scanner.nextLine();
@@ -69,6 +69,8 @@ public class Main {
                     }
                 }
 
+                searchLoop = true;
+
                 if (txtInput.toUpperCase().equals("C")) {
                     break;
                 } else if (txtInput.toUpperCase().equals("I")) {
@@ -79,21 +81,41 @@ public class Main {
                     queue.searchTicket(intInput);
                 }
                 break;
-            case 3:
-                System.out.print("Enter your ticket ID:\n>>> ");
-                intInput = scanner.nextInt();
-                scanner.nextLine();
+            case 3: // Edit a ticket
+                while (searchLoop) {
+                    System.out.print("Search by [I]D or [C]ancel\n>>> ");
+                    txtInput = scanner.nextLine();
+
+                    if (!txtInput.toUpperCase().equals("C") && !txtInput.toUpperCase().equals("I")) {
+                        System.out.println("[ERROR] Invalid input. Must be I or C.");
+                        searchLoop = true;
+                    } else {
+                        searchLoop = false;
+                    }
+                }
+
+                searchLoop = true;
+
+                if (txtInput.toUpperCase().equals("C")) {
+                    break;
+                } else if (txtInput.toUpperCase().equals("I")) {
+                    System.out.print("Enter your ticket ID:\n>>> ");
+                    intInput = scanner.nextInt();
+                    scanner.nextLine();
+
+                    queue.searchTicket(intInput);
+                }
 
                 queue.updateTicket(intInput);
                 break;
-            case 4:
+            case 4: // Delete a ticket
                 System.out.print("Enter the ticket ID to delete:\n>>> ");
                 intInput = scanner.nextInt();
                 scanner.nextLine();
 
                 queue.deleteTicket(intInput);
                 break;
-            case 5:
+            case 5: // List all tickets
                 queue.listTickets();
                 break;
         }
