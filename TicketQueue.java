@@ -60,6 +60,9 @@ public class TicketQueue {
     }
 
     public void deleteTicket(int id) {
+        Scanner scanner = new Scanner(System.in);
+        String txtInput = "";
+
         if (head == null) { // Again, head == null means that the list is empty
             System.out.println("[ERROR] There are no tickets to delete.\n");
             return;
@@ -80,11 +83,25 @@ public class TicketQueue {
             return;
         }
 
-        System.out.println("[INFO] Ticket with ID " + current.ticket.getId() + " successfully deleted.");
-        previous.next = current.next; // Removes the specific ticket
+        System.out.println("[INFO] Found ticket with ID " + current.ticket.getId() + "...\n");
+        System.out.println(current.ticket.toString());
+
+        while (!txtInput.toUpperCase().equals("Y") && !txtInput.toUpperCase().equals("N")) {
+            System.out.print("Are you sure you want to delete this ticket? Y/n\n>>> ");
+            txtInput = scanner.nextLine();
+
+            if (txtInput.toUpperCase().equals("Y")) {
+                System.out.println("[INFO] Ticket with ID " + current.ticket.getId() + " successfully deleted.");
+                previous.next = current.next; // Removes the specific ticket
+            } else if (txtInput.toUpperCase().equals("N")) {
+                return;
+            } else {
+                System.out.println("[ERROR] Invalid input. Must be Yy/Nn.");
+            }
+        }
     }
 
-    public Ticket searchTicket(int id) {
+    public Node searchTicket(int id) {
         if (head == null) {
             System.out.println("[ERROR] There are no tickets to search for.\n");
             return null;
@@ -102,7 +119,7 @@ public class TicketQueue {
 
         System.out.println("[INFO] Ticket " + current.ticket.getId() + " found.\n");
         System.out.println(current.ticket.toString());
-        return current.ticket;
+        return current;
     }
 
     public void updateTicket(int id) {
@@ -113,7 +130,7 @@ public class TicketQueue {
         String txtInput = "";
         int intInput;
 
-        Node current = head;
+        Node current = searchTicket(id);
         while (looping) {
             incorrect = true; // Refreshing so the inner while loop can iterate properly
             System.out.print(">>> Editable fields: [O]wner, [P]riority, [C]ancel\n>>> "); // User selects what value to edit
@@ -150,7 +167,5 @@ public class TicketQueue {
         }
         System.out.println("[INFO] Ticket " + current.ticket.getId() + " edited.\n");
         System.out.println(current.ticket.toString());
-
-        scanner.close();
     }
 }
