@@ -28,7 +28,7 @@ public class Ticket {
     public void setOwner (String owner) { this.owner = owner; }
     public void setPriority (int priority) {this.priority = priority; }
 
-    // ToDo toString format ticket information
+    // toStrings
     public String toString() {
         String priorityMessage = "";
 
